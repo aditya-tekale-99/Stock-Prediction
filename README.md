@@ -1,4 +1,4 @@
-# (Stock Price Forecasting using Alpha Vantage API and Snowflake ML)[https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/stock_prediction_dag.py]
+# ('Stock Price Forecasting using Alpha Vantage API and Snowflake ML')['https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/stock_prediction_dag.py']
 
 This project is an end-to-end pipeline for extracting stock price data from the Alpha Vantage API, transforming and loading it into Snowflake, and applying Snowflake's Machine Learning (ML) forecasting feature to predict stock prices for the next 7 days. The process is automated using Apache Airflow.
 
