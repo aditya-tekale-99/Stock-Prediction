@@ -18,21 +18,23 @@ def return_snowflake_conn():
 def extract_stock_data():
     api_key = Variable.get("alpha_vantage_api_key")
     symbols = ["TTWO", "GOOGL"]
-    stock_data = {} #empty dictionary
+    stock_data = {}  # Empty dictionary
 
-    #for loop to iterate through every record and extract from the api key
     for symbol in symbols:
         url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}'
         response = requests.get(url)
         data = response.json()
         
         if "Time Series (Daily)" in data:
-            stock_data[symbol] = data["Time Series (Daily)"]
+            # Limiting data to the latest 90 days
+            daily_data = data["Time Series (Daily)"]
+            latest_90_days_data = dict(list(daily_data.items())[:90])
+            stock_data[symbol] = latest_90_days_data
         else:
             logging.error(f"No data for {symbol}: {data}")
     
     logging.info(stock_data)
-    return stock_data #filling the data in the empty dictionary
+    return stock_data  # Returning data limited to 90 days
 
 #task to transform the extracted data
 @task
@@ -57,7 +59,7 @@ def transform_stock_data(raw_data):
             })
     
     logging.info(transformed_data)
-    return transformed_data
+    return transformed_data[:180]
 
 #task to load transformed data into snowflake table
 @task
@@ -189,7 +191,7 @@ def predict_stock_prices(forecast_function_name, train_input_table, forecast_tab
         
 #dag information
 with DAG(
-    dag_id='stock_prediction_model_v1.0',
+    dag_id='stock_prediction_model_v1.1',
     start_date=datetime(2024, 10, 9),
     schedule_interval='@daily',
     catchup=False,
