@@ -68,3 +68,21 @@ This repository contains the DAG and associated tasks for performing the followi
 - Support for additional stock symbols.
 - Integration with a dashboard tool like Power BI for real-time stock price and forecast visualization.
 - Extend the model to include more advanced features or ML algorithms for better accuracy.
+
+### Screenshots
+
+#### Airflow 
+![Airflow Web UI](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Airflow%20Log.png)
+![Airflow DAG Log](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Airflow%20Log.png)
+![Airflow DAG Graph](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Airflow%20graph.png)
+
+#### Snowflake Tables
+![dev.raw_data.stock_prices](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Stock_Prices_Table.png)
+![dev.adhoc.stock_prices_view](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Stock_Prices_View_Table.png)
+![dev.adhoc.stock_prices_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Stock_Prices_Forecast_Table.png)
+![dev.analytics.stock_prices_with_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Stock_prices_With-Forecast_Table.png)
+
+#### Snowflake Queries
+![Ccount of records in raw_data.stock_prices](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Count%20of%20records%20for%20each%20stock.png)
+![Predicted Stock Data in adhoc.stock_prices_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Predicted_Stock_Data.png)
+![Count of Records in analytics.stock_prices_with_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/dev.analytics.stock_prices_with_forecast.png)
