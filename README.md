@@ -43,7 +43,7 @@ This repository contains the DAG and associated tasks for performing the followi
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/your-username/stock-price-forecasting
+   git clone https://github.com/aditya-tekale-99/Stock-Prediction
    ```
 
 2. **Install dependencies**:
