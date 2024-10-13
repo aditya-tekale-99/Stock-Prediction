@@ -72,7 +72,7 @@ This repository contains the DAG and associated tasks for performing the followi
 ### Screenshots
 
 #### Airflow 
-![Airflow Web UI](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Airflow%20Log.png)
+![Airflow Web UI](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Airflow%20Web%20UI.png)
 ![Airflow DAG Log](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Airflow%20Log.png)
 ![Airflow DAG Graph](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Airflow%20graph.png)
 
