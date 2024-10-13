@@ -82,7 +82,7 @@ This repository contains the DAG and associated tasks for performing the followi
 ![dev.adhoc.stock_prices_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Stock_Prices_Forecast_Table.png)
 ![dev.analytics.stock_prices_with_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Stock_prices_With-Forecast_Table.png)
 
-#### Snowflake Queries
+#### Snowflake SQL Queries
 ![Ccount of records in raw_data.stock_prices](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Count%20of%20records%20for%20each%20stock.png)
 ![Predicted Stock Data in adhoc.stock_prices_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/Predicted_Stock_Data.png)
 ![Count of Records in analytics.stock_prices_with_forecast](https://github.com/aditya-tekale-99/Stock-Prediction/blob/main/Screenshots/dev.analytics.stock_prices_with_forecast.png)
