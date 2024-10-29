@@ -67,6 +67,7 @@ def load_to_snowflake(data):
     conn = return_snowflake_conn() #opening connection to snowflake
     cur = conn.cursor() #defining cursor object
     try:
+        cur.execute("BEGIN;")
         #sql queries to create DB, Schema and tables
         cur.execute("CREATE DATABASE IF NOT EXISTS dev;")
         cur.execute("USE DATABASE dev;")
@@ -126,6 +127,7 @@ def train_forecast_model(train_input_table, train_view, forecast_function_name):
     );"""
     
     try:
+        cur.execute("BEGIN;")
         # Ensure that the adhoc schema exists
         cur.execute("USE DATABASE dev;")
         cur.execute("CREATE SCHEMA IF NOT EXISTS adhoc;")  # Create adhoc schema if not exists
@@ -145,6 +147,7 @@ def train_forecast_model(train_input_table, train_view, forecast_function_name):
     
     except Exception as e:
         logging.error(f"Error in train_forecast_model: {e}")
+        cur.execute("ROLLBACK;")
         raise
     finally:
         cur.close()
@@ -155,9 +158,6 @@ def train_forecast_model(train_input_table, train_view, forecast_function_name):
 def predict_stock_prices(forecast_function_name, train_input_table, forecast_table, final_table):
     conn = return_snowflake_conn()
     cur = conn.cursor()
-    
-    # Ensure that the analytics schema exists
-    cur.execute("USE SCHEMA dev.analytics;")
     
     make_prediction_sql = f"""BEGIN
         CALL {forecast_function_name}!FORECAST(
@@ -176,6 +176,10 @@ def predict_stock_prices(forecast_function_name, train_input_table, forecast_tab
         FROM {forecast_table};"""
     
     try:
+        cur.execute("BEGIN;")
+        # Ensure that the analytics schema exists
+        cur.execute("USE SCHEMA dev.analytics;")
+        
         logging.info(f"Making predictions with SQL: {make_prediction_sql}")
         cur.execute(make_prediction_sql)
         
@@ -184,6 +188,7 @@ def predict_stock_prices(forecast_function_name, train_input_table, forecast_tab
     
     except Exception as e:
         logging.error(f"Error in predict_stock_prices: {e}")
+        cur.execute("ROLLBACK;")
         raise
     finally:
         cur.close()
