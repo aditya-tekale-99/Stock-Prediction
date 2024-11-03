@@ -127,7 +127,7 @@ def train_forecast_model(train_input_table, train_view, forecast_function_name):
     );"""
     
     try:
-        #cur.execute("BEGIN;")
+        cur.execute("BEGIN;")
         # Ensure that the adhoc schema exists
         cur.execute("USE DATABASE dev;")
         cur.execute("CREATE SCHEMA IF NOT EXISTS adhoc;")  # Create adhoc schema if not exists
@@ -144,10 +144,12 @@ def train_forecast_model(train_input_table, train_view, forecast_function_name):
 
         # Check evaluation metrics (optional)
         cur.execute(f"CALL {forecast_function_name}!SHOW_EVALUATION_METRICS();")
+
+        cur.execute("COMMIT;")
     
     except Exception as e:
         logging.error(f"Error in train_forecast_model: {e}")
-        #cur.execute("ROLLBACK;")
+        cur.execute("ROLLBACK;")
         raise
     finally:
         cur.close()
@@ -186,10 +188,12 @@ def predict_stock_prices(forecast_function_name, train_input_table, forecast_tab
         
         logging.info(f"Creating final table with SQL: {create_final_table_sql}")
         cur.execute(create_final_table_sql)
+
+        cur.execute("COMMIT;")
     
     except Exception as e:
         logging.error(f"Error in predict_stock_prices: {e}")
-        #cur.execute("ROLLBACK;")
+        cur.execute("ROLLBACK;")
         raise
     finally:
         cur.close()
@@ -197,7 +201,7 @@ def predict_stock_prices(forecast_function_name, train_input_table, forecast_tab
         
 #dag information
 with DAG(
-    dag_id='stock_prediction_model_v1.1',
+    dag_id='stock_prediction_model_v1.2',
     start_date=datetime(2024, 10, 9),
     schedule_interval='@daily',
     catchup=False,
