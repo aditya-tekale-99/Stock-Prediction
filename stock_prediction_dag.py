@@ -161,8 +161,6 @@ def predict_stock_prices(forecast_function_name, train_input_table, forecast_tab
     conn = return_snowflake_conn()
     cur = conn.cursor()
 
-    #cur.execute("USE SCHEMA dev.analytics;")
-
     make_prediction_sql = f"""BEGIN
         CALL {forecast_function_name}!FORECAST(
             FORECASTING_PERIODS => 7,
@@ -179,10 +177,7 @@ def predict_stock_prices(forecast_function_name, train_input_table, forecast_tab
         SELECT replace(series, '"', '') as SYMBOL, ts as DATE, NULL AS actual, forecast, lower_bound, upper_bound
         FROM {forecast_table};"""
     
-    try:
-        #cur.execute("BEGIN;")
-        # Ensure that the analytics schema exists
-        
+    try:        
         logging.info(f"Making predictions with SQL: {make_prediction_sql}")
         cur.execute(make_prediction_sql)
         
